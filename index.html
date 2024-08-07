@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TG Translator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="script.js" defer></script> </head>
+<body>
+    <div class="container">
+        <h1>TG Translator</h1>
+        <div class="input-area">
+            <label for="input-text">Text to Translate:</label>
+            <textarea id="input-text" placeholder="Enter your text"></textarea>
+        </div>
+        <div class="language-select">
+            <label for="source-language">Source Language:</label>
+            <select id="source-language">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                </select>
+            <label for="target-language">Target Language:</label>
+            <select id="target-language">
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <button id="translate-button">Translate</button>
+        <div class="output-area">
+            <label for="translation">Translation:</label>
+            <textarea id="translation" readonly></textarea>
+        </div>
+    </div>
+</body>
+</html>
