@@ -9,8 +9,8 @@ translateButton.addEventListener('click', () => {
     const sourceLang = sourceLanguage.value;
     const targetLang = targetLanguage.value;
 
-    // Replace this with your actual translation API call
-    // Example using Google Translate (you'll need a Google Translate API key)
+    // Замена этого места вашим вызовом API перевода
+    // Пример с использованием Google Translate (вам понадобится ключ API Google Translate)
     fetch(`https://translation.googleapis.com/language/translate/v2?key=AIzaSyBfecLL4DC-kRVHvEwMoHhVcaxAsulCuYg&source=${sourceLang}&target=${targetLang}&q=${textToTranslate}`)
         .then(response => response.json())
         .then(data => {
@@ -18,6 +18,28 @@ translateButton.addEventListener('click', () => {
         })
         .catch(error => {
             console.error('Error translating:', error);
-            // Handle the error gracefully (e.g., display a message to the user)
+            // Обработка ошибки (например, отображение сообщения пользователю)
         });
 });
+
+// Проверка текущей темы
+if (Telegram.WebApp.colorScheme === 'dark') {
+    // Применение дополнительных стилей для темной темы, если необходимо
+    console.log("Dark theme is active.");
+
+    // Пример: сделать фон кнопки темнее
+    translateButton.style.backgroundColor = "#333"; // Настроить цвет по желанию
+
+    // Пример: изменить цвет текста для контраста
+    translation.style.color = "white"; // Настроить цвет по желанию
+
+} else {
+    // Применение дополнительных стилей для светлой темы, если необходимо
+    console.log("Light theme is active.");
+
+    // Пример: сделать фон кнопки светлее
+    translateButton.style.backgroundColor = "#007bff"; // Исходный цвет
+
+    // Пример: изменить цвет текста для контраста
+    translation.style.color = "black"; // Исходный цвет
+}
