@@ -1,44 +1,223 @@
-/* Общие стили */
-.container {
-    width: 90%;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc; /* Изменить цвет границы */
-    border-radius: 5px;
-    background-color: var(--tg-theme-bg-color); /* Использовать переменную темы Telegram */
-    color: var(--tg-theme-text-color); /* Использовать переменную темы Telegram */
+body {
+    font-family: 'Roboto', sans-serif; 
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
-h1 {
+.container {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.title {
     text-align: center;
     margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #007bff; 
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: title-animation 1s ease-in-out;
 }
 
-.input-area, .language-select, .output-area {
-    margin-bottom: 15px;
+@keyframes title-animation {
+    0% { transform: translateY(-10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+.input-area, .language-selection, .output-area {
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc; /* Изменить цвет границы */
-    border-radius: 3px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
     resize: vertical;
-    background-color: var(--tg-theme-bg-color); /* Использовать переменную темы Telegram */
-    color: var(--tg-theme-text-color); /* Использовать переменную темы Telegram */
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    font-size: 1.1rem;
+    transition: box-shadow 0.2s ease-in-out;
+    box-sizing: border-box;
+}
+
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+}
+
+.language-selection {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.language-group {
+    display: flex;
+    flex-direction: column;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M7.5 7.5 10 10 12.5 7.5' stroke='gray' stroke-width='2'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px;
 }
 
 #translate-button {
-    padding: 10px 20px;
-    background-color: #007bff; /* Изменить цвет кнопки */
-    color: white;
+    padding: 15px 30px;
     border: none;
-    border-radius: 3px;
+    border-radius: 15px;
+    background-color: #007bff; 
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#translate-button:hover {
+    background-color: #0069d9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.output-area {
+    position: relative; /* Для позиционирования кнопки "Copy" */
+}
+
+.output-area textarea {
+    height: 150px;
+}
+
+.copy-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #007bff; 
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.copy-button:hover {
+    background-color: #0069d9;
+}
+
+/* Стили для оверлея загрузки */
+.loading-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 5px solid #007bff;
+    border-color: #007bff transparent #007bff transparent;
+    animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.footer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Добавьте стили для отображения ошибок */
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    animation: shake 0.5s ease-in-out;
+    display: none; /* Скрываем ошибку по умолчанию */
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .language-selection {
+        flex-direction: column; 
+    }
+
+    textarea {
+        font-size: 1rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem; 
+    }
+
+    #translate-button {
+        font-size: 1rem;
+    }
 }
